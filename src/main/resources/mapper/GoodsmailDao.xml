@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdfg.selfmail.dao.GoodsmailDao">
+  <resultMap id="BaseResultMap" type="com.cdfg.selfmail.pojo.dto.GoodsMailDto">
+    <id column="POST_ID" jdbcType="VARCHAR" property="postId" />
+    <result column="EXPRESS_ID" jdbcType="VARCHAR" property="expressId" />
+    <result column="CONSIGNEE" jdbcType="VARCHAR" property="consignee" />
+    <result column="TEL_NUM" jdbcType="VARCHAR" property="telNum" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="FLIGHT_NUM" jdbcType="VARCHAR" property="flightNum" />
+    <result column="LEAVE_PLACE" jdbcType="VARCHAR" property="leavePlace" />
+    <result column="POST_ADDRESS" jdbcType="VARCHAR" property="postAddress" />
+    <result column="FLIGHT_TIME" jdbcType="TIMESTAMP" property="flightTime" />
+    <result column="STR1" jdbcType="VARCHAR" property="str1" />
+    <result column="STR2" jdbcType="VARCHAR" property="str2" />
+    <result column="STR3" jdbcType="VARCHAR" property="str3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    POST_ID, EXPRESS_ID, CONSIGNEE, TEL_NUM, CARD_ID, FLIGHT_NUM, LEAVE_PLACE, POST_ADDRESS, 
+    FLIGHT_TIME, STR1, STR2, STR3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GOODSMAIL
+    where POST_ID = #{postId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from GOODSMAIL
+    where POST_ID = #{postId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="POST_ID" keyProperty="postId" parameterType="com.cdfg.selfmail.pojo.dto.GoodsMailDto" useGeneratedKeys="true">
+    insert into GOODSMAIL (EXPRESS_ID, CONSIGNEE, TEL_NUM, 
+      CARD_ID, FLIGHT_NUM, LEAVE_PLACE, 
+      POST_ADDRESS, FLIGHT_TIME, STR1, 
+      STR2, STR3)
+    values (#{expressId,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, #{telNum,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{flightNum,jdbcType=VARCHAR}, #{leavePlace,jdbcType=VARCHAR}, 
+      #{postAddress,jdbcType=VARCHAR}, #{flightTime,jdbcType=TIMESTAMP}, #{str1,jdbcType=VARCHAR}, 
+      #{str2,jdbcType=VARCHAR}, #{str3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="POST_ID" keyProperty="postId" parameterType="com.cdfg.selfmail.pojo.dto.GoodsMailDto" useGeneratedKeys="true">
+    insert into GOODSMAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expressId != null">
+        EXPRESS_ID,
+      </if>
+      <if test="consignee != null">
+        CONSIGNEE,
+      </if>
+      <if test="telNum != null">
+        TEL_NUM,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="flightNum != null">
+        FLIGHT_NUM,
+      </if>
+      <if test="leavePlace != null">
+        LEAVE_PLACE,
+      </if>
+      <if test="postAddress != null">
+        POST_ADDRESS,
+      </if>
+      <if test="flightTime != null">
+        FLIGHT_TIME,
+      </if>
+      <if test="str1 != null">
+        STR1,
+      </if>
+      <if test="str2 != null">
+        STR2,
+      </if>
+      <if test="str3 != null">
+        STR3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expressId != null">
+        #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="telNum != null">
+        #{telNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="flightNum != null">
+        #{flightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="leavePlace != null">
+        #{leavePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="postAddress != null">
+        #{postAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="flightTime != null">
+        #{flightTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="str1 != null">
+        #{str1,jdbcType=VARCHAR},
+      </if>
+      <if test="str2 != null">
+        #{str2,jdbcType=VARCHAR},
+      </if>
+      <if test="str3 != null">
+        #{str3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdfg.selfmail.pojo.dto.GoodsMailDto">
+    update GOODSMAIL
+    <set>
+      <if test="expressId != null">
+        EXPRESS_ID = #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        CONSIGNEE = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="telNum != null">
+        TEL_NUM = #{telNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        CARD_ID = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="flightNum != null">
+        FLIGHT_NUM = #{flightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="leavePlace != null">
+        LEAVE_PLACE = #{leavePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="postAddress != null">
+        POST_ADDRESS = #{postAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="flightTime != null">
+        FLIGHT_TIME = #{flightTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="str1 != null">
+        STR1 = #{str1,jdbcType=VARCHAR},
+      </if>
+      <if test="str2 != null">
+        STR2 = #{str2,jdbcType=VARCHAR},
+      </if>
+      <if test="str3 != null">
+        STR3 = #{str3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where POST_ID = #{postId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdfg.selfmail.pojo.dto.GoodsMailDto">
+    update GOODSMAIL
+    set EXPRESS_ID = #{expressId,jdbcType=VARCHAR},
+      CONSIGNEE = #{consignee,jdbcType=VARCHAR},
+      TEL_NUM = #{telNum,jdbcType=VARCHAR},
+      CARD_ID = #{cardId,jdbcType=VARCHAR},
+      FLIGHT_NUM = #{flightNum,jdbcType=VARCHAR},
+      LEAVE_PLACE = #{leavePlace,jdbcType=VARCHAR},
+      POST_ADDRESS = #{postAddress,jdbcType=VARCHAR},
+      FLIGHT_TIME = #{flightTime,jdbcType=TIMESTAMP},
+      STR1 = #{str1,jdbcType=VARCHAR},
+      STR2 = #{str2,jdbcType=VARCHAR},
+      STR3 = #{str3,jdbcType=VARCHAR}
+    where POST_ID = #{postId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdfg.selfmail.dao.CountDao">
+    <resultMap id="BaseResultMap" type="com.cdfg.selfmail.pojo.dto.UserAndOrderItemDto">
+        <result column="gmzjno" jdbcType="VARCHAR" property="ret_card" />
+        <result column="gmname" jdbcType="VARCHAR" property="ret_name" />
+        <collection property="orderList" ofType="com.cdfg.selfmail.pojo.dto.OrderItemDto">
+            <result column="SHXSDNO" jdbcType="VARCHAR" property="ret_picknum" />
+            <result column="MARKET" jdbcType="VARCHAR" property="ret_mark" />
+            <result column="SHOUGHTPAY" jdbcType="DECIMAL" property="ret_money" />
+            <result column="SHDPTTIME" jdbcType="TIMESTAMP" property="leave_time" />
+            <result column="SHDPTAIRLINE" jdbcType="VARCHAR" property="flight_num" />
+            <result column="SHDTHDD" jdbcType="VARCHAR" property="leave_place" />
+        </collection>
+    </resultMap>
+    <select id="getLotrycount" parameterType="com.cdfg.selfmail.pojo.dto.CardInfoDto" resultType="com.cdfg.selfmail.pojo.dto.UserAndOrderItemDto">
+        select
+            gm.gmzjno,
+            gm.gmname,
+            sh.shxsdno,
+            sh.market,
+            sh.shoughtpay,
+            sh.shdpttime,
+            sh.shdptairline,
+            sh.shdthdd
+       from sellhead_sh sh,gwk_main gm
+      where sh.shcustpass = #{card_id,jdbcType=VARCHAR}
+        and sh.shstr6 = #{tel_num,jdbcType=VARCHAR}
+        and sh.shdpttime > sysdate
+        and sh.shcustpass = gm.gmzjno
+        and sh.shxsdno not exists (select md.pick_num from goodsmail gml,maildetail md
+              where gml.card_id=#{card_id,jdbcType=VARCHAR}
+                and gml.tel_num=#{tel_num,jdbcType=VARCHAR}
+                and gml.post_id = md.post_id)
+    </select>
+
+</mapper>

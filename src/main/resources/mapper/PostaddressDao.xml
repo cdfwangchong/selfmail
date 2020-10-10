@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdfg.selfmail.dao.PostaddressDao">
+  <resultMap id="BaseResultMap" type="com.cdfg.selfmail.pojo.dto.PostAddressDto">
+    <result column="CONSIGNEE" jdbcType="VARCHAR" property="consignee" />
+    <result column="TEL_NUM" jdbcType="VARCHAR" property="telNum" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="POST_ADDRESS" jdbcType="VARCHAR" property="postAddress" />
+    <result column="STR1" jdbcType="VARCHAR" property="str1" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cdfg.selfmail.pojo.dto.PostAddressDto">
+    insert into POSTADDRESS (CONSIGNEE, TEL_NUM, CARD_ID, 
+      POST_ADDRESS, STR1)
+    values (#{consignee,jdbcType=VARCHAR}, #{telNum,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, 
+      #{postAddress,jdbcType=VARCHAR}, #{str1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdfg.selfmail.pojo.dto.PostAddressDto">
+    insert into POSTADDRESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consignee != null">
+        CONSIGNEE,
+      </if>
+      <if test="telNum != null">
+        TEL_NUM,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="postAddress != null">
+        POST_ADDRESS,
+      </if>
+      <if test="str1 != null">
+        STR1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consignee != null">
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="telNum != null">
+        #{telNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="postAddress != null">
+        #{postAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="str1 != null">
+        #{str1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
